@@ -1,3 +1,3 @@
 # BusBookingApp
 
-[Fika]([GitHub](http://github.com))
+[Fika](https://teekize.github.io/BusBookingApp/index.html)
