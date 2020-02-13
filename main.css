@@ -30,3 +30,12 @@ body{
     background-color: black;
     background-blend-mode: screen;
 }
+
+
+
+.login-form{
+    /* background-color: #74b9ff; */
+    margin-left: 15%;
+    margin-right: 10%;
+    margin-top: 10%;
+}
