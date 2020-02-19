@@ -27,4 +27,4 @@ def bookings():
 
 
 if __name__ == "__main__":
-    fika.run(debug=True)
+    fika.run()
