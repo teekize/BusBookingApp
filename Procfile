@@ -1,1 +1,1 @@
-web: gunicorn -w 4 fika:app
+web: gunicorn -w 4 app:fika
