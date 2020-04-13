@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <title>Fika</title>
+</head>
+
+<body>
+    <div>
+        <ul class="nav nav-pills nav-fill text-dark">
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ url_for('homepage')}}">Home</a>
+            </li>
+            <!-- <li class="nav-item">
+            <a class="nav-link  text-white" href="{{ url_for('user_login')}}">Login</a>
+          </li> -->
+            <!-- <li class="nav-item">
+            <a class="nav-link active text-white" href="{{ url_for('register')}}">register</a>
+          </li> -->
+            {% if current_user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ url_for('logout')}}">logout</a>
+            </li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            {%if current_user.is_admin == True%}
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ url_for('add_safari')}}">Add_safari</a>
+            </li>
+            {%endif%}
+            {% endif %}
+
+        </ul>
+    </div>
+
+    {% if current_user.is_authenticated %}
+    {%if current_user.is_admin == True%}
+
+    {% for data in data%}
+
+    <!-- <div class="list-group"> -->
+    <div>
+        <a href="#" class="list-group-item list-group-item-action ">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1 success">Booking id is {{data.id}} was booked by {{data.booked_by_id}}</h5>
+
+            </div>
+            <p class="mb-1">Is ticket paid {{data.is_paid}}</p>
+            <p class="mb-1">Has booking been cancelled {{data.is_cancelled}}</p>
+            <small>Was created by <b>{{data.createon_time}}</b></small>
+        </a>
+    </div>
+    <div>
+        <div>
+            <p></p>
+        </div>
+    </div>
+    {%endfor%}
+
+    {%endif%}
+    {% endif %}
+
+
+    <!-- </div> -->
+
+    {% if current_user.is_authenticated %}
+    {% for data in data%}
+
+    <!-- <div class="list-group"> -->
+    <div>
+        <a href="#" class="list-group-item list-group-item-action ">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1 success">Booking id <b>{{data.id}}</b></h5>
+                
+            </div>
+            <p class="mb-1">Is ticket paid {{data.is_paid}}</p>
+            <p class="mb-1">Has booking been cancelled {{data.is_cancelled}}</p>
+            <small>Was booked on <b>{{data.createon_time}}</b></small>
+        </a>
+    </div>
+    <div>
+        <div>
+            <p></p>
+        </div>
+    </div>
+    {%endfor%}
+    {% endif %}
+   
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

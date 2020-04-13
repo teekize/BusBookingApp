@@ -24,17 +24,49 @@
         <a class="nav-link text-white" href="{{ url_for('user_login')}}">Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="{{ url_for('user_register')}}">register</a>
+        <a class="nav-link text-white" href="{{ url_for('register')}}">register</a>
       </li>
+      
+      {% if current_user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link text-white" href="{{ url_for('add_safari')}}" >book</a>
+        <a class="nav-link text-white" href="{{ url_for('logout')}}">logout</a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{{ url_for('my_bookings')}}">mybookings</a>
+      </li>
+      {% endif %}
+      {% if current_user.is_authenticated %}
+        {%if current_user.is_admin == True%}
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('add_safari')}}">Add_safari</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('all_safaris')}}">All_safaris</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('all_bookings')}}">All_bookings</a>
+        </li>
+        {%endif%}
+      {% endif %}
+      
     </ul>
   </div>
 
   <div class="back-img">
 
+  {%with messages =get_flashed_messages()%}
+  {%if messages%}
 
+  {% for message in messages%}
+  <div class="alert alert-primary" role="alert">
+    {{message}}
+  </div>
+  {%endfor%}
+  {%endif %}
+  {%endwith%}
     
 
     <div class="para-image">
@@ -44,19 +76,31 @@
 
     <div class="search">
       
-        <form class="form-inline">
+        <form class="form-inline" action="{{ url_for('search') }}" method="GET">
           <div class="form-group mb-2">
-            <label for="inputEmail2" class="sr-only">Email</label>
-            <input type="text"  class="form-control" id="inputEmail2" placeholder="From">
+            <label for="inputEmail2" class="sr-only">From</label>
+            <!-- <input type="text"  class="form-control" id="inputEmail2" placeholder="From" name="from"> -->
+            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="from" placeholder="Leaving From">
+              <option selected disabled>Leaving From</option>
+              <option value="Nairobi">Nairobi</option>
+            <option value="Kisumu">Kisumu</option>
+            <option value="Busia">Busia</option>
+            </select>
           </div>
           <div class="form-group mx-sm-3 mb-2">
-            <label for="inputPassword2" class="sr-only">Password</label>
-            <input type="text" class="form-control" id="inputPassword2" placeholder="To">
+            <label for="inputPassword2" class="sr-only">Destination</label>
+            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="destination" placeholder="Going To ">
+              <option selected disabled>Going To</option>
+              <option value="Nairobi">Nairobi</option>
+            <option value="Kisumu">Kisumu</option>
+            <option value="Busia">Busia</option>
+            </select>
+            <!-- <input type="text" class="form-control" id="inputPassword2" placeholder="To" name="destination"> -->
           </div>
 
           <div class="form-group mx-sm-3 mb-2">
             <label for="inputPassword2" class="sr-only">date</label>
-            <input type="date" class="form-control" id="inputPassword2" placeholder="Date">
+            <input type="date" class="form-control" id="inputPassword2" placeholder="Date" name= "date">
           </div>
           <button type="submit" class="btn btn-primary mb-2">Search</button>
         </form>

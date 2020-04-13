@@ -24,34 +24,52 @@
         <a class="nav-link active text-white" href="{{ url_for('user_login')}}">Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="{{ url_for('user_register')}}">register</a>
+        <a class="nav-link text-white" href="{{ url_for('register')}}">register</a>
       </li>
+      {% if current_user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link text-white" href="{{ url_for('bookings')}}" >book</a>
+        <a class="nav-link text-white" href="{{ url_for('logout')}}">logout</a>
       </li>
-    </ul>
-  </div>
-    
-
+      {% endif %}
+  </ul></div>
 <div class="login-form">
 
-    <form>
+    <form action="" method="POST">
 
         <h3 style="text-align: center;">Add the bus information</h3>
         <div class="form-group">
           <label for="exampleInputEmail1">Number-plate</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="KCB 212J">
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="bus_number"
+          placeholder="KCB 212J">
           
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Route</label>
-          <input type="text" class="form-control" id="exampleInputPassword1">
+          <label for="exampleInputPassword1">From</label>
+          <!-- <input type="text" class="form-control" id="exampleInputPassword1"  placeholder="Nairobi" name="from"> -->
+          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="from" placeholder="Leaving From">
+            <option selected disabled>Leaving From</option>
+            <option value="Nairobi">Nairobi</option>
+            <option value="Kisumu">Kisumu</option>
+            <option value="Busia">Busia</option>
+          </select>
+          
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Destination</label>
+          <!-- <input type="text" class="form-control" id="exampleInputPassword1"  placeholder="Kisumu" name="Destination"> -->
+          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="Destination" placeholder="Going TO">
+            <option selected disabled>Going To</option>
+            <option value="Nairobi">Nairobi</option>
+            <option value="Kisumu">Kisumu</option>
+            <option value="Busia">Busia</option>
+          </select>
+          
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Depature Time</label>
-            <input type="datetime" class="form-control" id="exampleInputPassword1">
+            <input type="date" class="form-control" id="exampleInputPassword1" name= "depature_date">
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="exampleInputPassword1">Arrival Time</label>
             <input type="datetime" class="form-control" id="exampleInputPassword1">
           </div>
@@ -59,7 +77,7 @@
           <div class="form-group">
             <label for="exampleInputPassword1">Fare</label>
             <input type="number" class="form-control" id="exampleInputPassword1">
-          </div>
+          </div> -->
         <!-- <div class="form-group form-check">
           <input type="checkbox" class="form-check-input" id="exampleCheck1">
           <label class="form-check-label" for="exampleCheck1">Check me out</label>

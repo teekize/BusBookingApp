@@ -14,55 +14,51 @@
 </head>
 
 <body>
-
     <div>
         <ul class="nav nav-pills nav-fill text-dark">
           <li class="nav-item">
             <a class="nav-link text-white" href="{{ url_for('homepage')}}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active text-white" href="{{ url_for('user_login')}}">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="{{ url_for('register')}}">register</a>
-          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link  text-white" href="{{ url_for('user_login')}}">Login</a>
+          </li> -->
+          <!-- <li class="nav-item">
+            <a class="nav-link active text-white" href="{{ url_for('register')}}">register</a>
+          </li> -->
           {% if current_user.is_authenticated %}
+            {%if current_user.is_admin == True%}
           <li class="nav-item">
-            <a class="nav-link text-white" href="{{ url_for('logout')}}">logout</a>
+            <a class="nav-link text-white" href="{{ url_for('add_safari')}}">Add_safari</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active text-white" href="{{ url_for('logout')}}">logout</a>
+          </li>
+          {%endif%}
           {% endif %}
         </ul>
       </div>
-    
 
-<div class="login-form">
+    {% for bus in buses%}
 
-    <form action="" method="POST">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
-        
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" name="password">
-        </div>
-        <!-- <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div> -->
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+<!-- <div class="list-group"> -->
+    <div>
+    <a href="#" class="list-group-item list-group-item-action ">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">Route {{bus.from_}} to {{bus.Destination}}</h5>
+        <small>Was created on {{bus.createdon_time}}</small>
+      </div>
+      <p class="mb-1">Donec id elit non mi porta gravida at eget metus.
+           Maecenas sed diam eget risus varius blandit.</p>
+      <small>Was created by <b>{{bus.created_by}}</b></small>
+    </a>
+    </div>
+    <div>
+        <div><p></p></div>
+    </div>
+    {%endfor%}
+  <!-- </div> -->
 
-
-    
-</div>
-
-  
-
- 
-
-  <!-- Optional JavaScript -->
+ <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

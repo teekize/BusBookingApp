@@ -24,11 +24,14 @@
         <a class="nav-link  text-white" href="{{ url_for('user_login')}}">Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="{{ url_for('user_register')}}">register</a>
+        <a class="nav-link text-white" href="{{ url_for('register')}}">register</a>
       </li>
+      {% if current_user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link active text-white" href="{{ url_for('bookings')}}" >book</a>
+        <a class="nav-link text-white" href="{{ url_for('logout')}}">logout</a>
       </li>
+      {% endif %}
+    
     </ul>
   </div>
     
@@ -47,11 +50,33 @@
         </div>
       </div>
     </div>
- -->
+ -->{% for bus in buses%}
 
-    <div class="card-group">
+    <!-- <div class="card-group"> -->
         <div class="card text-dark">
-            <img src="/static/images/bus.jpg" class="card-img-top" alt="...">
+            <!-- <img src="/static/images/bus.jpg" class="card-img-top" alt="..."> -->
+            <div class="card-body">
+              <h5 class="card-title"> {{bus.get("from_")}} to {{bus.get('Destination')}} <span>  </span>  
+                               
+                <button type="button" class="btn btn-success">ksh.500</button>
+                
+
+              </h5>
+              <p class="card-text"><span>Depature-Time</span>  {{ bus.get("Depature_date")}}</p>
+              <p class="card-text"><span>Arrival-Time</span>   12:00pm</p>
+              <h5>{{ bus.get('bus_number')}}</h5>
+            
+              <form action="{{ url_for('bookings', journey_id= bus.id)}}" method="POST">
+                <button type="submit" class="btn btn-primary">Book Now</button>
+              </form>
+            </div>
+          <div class="card-footer">
+            <small class="text-muted"></small>
+          </div>
+      {%endfor%}
+        <!-- </div>
+        <div class="card text-dark">
+            <img src="bus.jpg" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title"> Voi to Nairobi <span>  </span>  <button type="button" class="btn btn-success">ksh.500</button></h5>
               <p class="card-text"><span>Depature-Time</span>  10:00pm</p>
@@ -59,7 +84,7 @@
     
             
     
-              <a style="text-align: center;" href="#" class="btn btn-primary">Book</a>
+              <a href="#" class="btn btn-primary">Book</a>
             </div>
           <div class="card-footer">
             <small class="text-muted">Last updated 3 mins ago</small>
@@ -79,27 +104,12 @@
           <div class="card-footer">
             <small class="text-muted">Last updated 3 mins ago</small>
           </div>
-        </div>
-        <div class="card text-dark">
-            <img src="bus.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title"> Voi to Nairobi <span>  </span>  <button type="button" class="btn btn-success">ksh.500</button></h5>
-              <p class="card-text"><span>Depature-Time</span>  10:00pm</p>
-              <p class="card-text"><span>Arrival-Time</span>   12:00pm</p>
-    
-            
-    
-              <a href="#" class="btn btn-primary">Book</a>
-            </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
-        </div>
+        </div> -->
 
         <!-- <div class="alert alert-danger" role="alert" disable>
             No bus was found heading to that route
           </div> -->
-      </div>
+      <!-- </div> -->
 
 
  
